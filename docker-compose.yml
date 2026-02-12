@@ -1,0 +1,31 @@
+services:
+  product-service:
+    build:
+      context: ./product-service/product-service/product-service
+    container_name: product-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  order-service:
+    build:
+      context: ./order-service/order-service
+    container_name: order-service
+    ports:
+      - "8082:8082"
+    environment:
+      - PRODUCT_SERVICE_URL=http://product-service:8081
+    depends_on:
+      product-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
