@@ -23,12 +23,12 @@ jobs:
 
       - name: Build Product Service
         run: |
-          cd product-service
+          cd Product-service/Product-service/Product-service
           mvn clean verify
 
       - name: Build Order Service
         run: |
-          cd order-service
+          cd order-service/order-service/order-service
           mvn clean verify
 
       - name: Upload Test Reports
@@ -36,8 +36,8 @@ jobs:
         with:
           name: test-reports
           path: |
-            product-service/target/surefire-reports
-            order-service/target/surefire-reports
+            Product-service/Product-service/Product-service/target/surefire-reports
+            order-service/order-service/order-service/target/surefire-reports
 
   docker-build:
     runs-on: ubuntu-latest
