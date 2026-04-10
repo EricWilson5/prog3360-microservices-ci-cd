@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: prog3360-assignment
+data:
+  APP_ENV: "development"
+  PRODUCT_SERVICE_URL: "http://product-service:8081"
+  APP_VERSION: "v1"

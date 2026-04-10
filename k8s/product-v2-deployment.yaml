@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service-v2
+  namespace: prog3360-assignment
+  labels:
+    app: product-service
+    version: v2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: product-service
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: product-service
+        version: v2
+    spec:
+      containers:
+        - name: product-api
+          image: product-service:v2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8081
+          envFrom:
+            - configMapRef:
+                name: app-config
